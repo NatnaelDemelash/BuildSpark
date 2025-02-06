@@ -1,39 +1,52 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const projects = [
   {
     id: 1,
-    title: "AI-Powered Story Builder",
-    description: "A collaborative storytelling app with AI-generated prompts",
-    difficulty: "Intermediate",
-    tags: ["AI", "Next.js"],
+    title: 'AI-Powered Story Builder',
+    description: 'A collaborative storytelling app with AI-generated prompts',
+    difficulty: 'Intermediate',
+    tags: ['AI', 'Next.js'],
   },
   {
     id: 2,
-    title: "3D Product Customizer",
-    description: "Customize 3D products in real-time",
-    difficulty: "Advanced",
-    tags: ["GSAP", "React Three Fiber"],
+    title: '3D Product Customizer',
+    description: 'Customize 3D products in real-time',
+    difficulty: 'Advanced',
+    tags: ['GSAP', 'React Three Fiber'],
   },
   {
     id: 3,
-    title: "Interactive Roadmap Tracker",
-    description: "Track your learning journey interactively",
-    difficulty: "Beginner",
-    tags: ["Next.js", "TypeScript"],
+    title: 'Interactive Roadmap Tracker',
+    description: 'Track your learning journey interactively',
+    difficulty: 'Beginner',
+    tags: ['Next.js', 'TypeScript'],
   },
 ];
 
 export default function Home() {
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('all');
 
-  const filteredProjects = projects.filter((project) =>
-    project.title.toLowerCase().includes(search.toLowerCase())
-  );
+  // const filteredProjects = projects.filter((project) =>
+  //   project.title.toLowerCase().includes(search.toLowerCase())
+  // );
+
+  // const filteredProjectsByLevel = projects.filter((project) => {
+  //   return filter === 'all' ? true : project.difficulty === filter;
+  // });
+
+  const filteredProjects = projects
+    .filter(
+      (project) =>
+        filter === 'all' || project.difficulty.toLowerCase() === filter
+    )
+    .filter((project) =>
+      project.title.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
@@ -43,11 +56,11 @@ export default function Home() {
       </h1>
 
       {/* Filters & Search */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-end mb-8 gap-4">
         {/* Filter Dropdown */}
         <div className="flex items-center gap-3">
           <label htmlFor="projectType" className="text-gray-700 font-medium">
-            Filter by Type:
+            Filter by Level:
           </label>
           <select
             id="projectType"
@@ -56,22 +69,21 @@ export default function Home() {
             onChange={(e) => setFilter(e.target.value)}
           >
             <option value="all">All</option>
-            <option value="frontend">Front-End</option>
-            <option value="backend">Back-End</option>
-            <option value="fullstack">Full-Stack</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
           </select>
         </div>
 
         {/* Search Bar */}
-        <div className="relative flex-1 max-w-md mx-auto">
+        <div className="relative flex-1 max-w-md">
           <input
             type="text"
-            placeholder="🔍 Search projects..."
+            placeholder=" Search projects..."
             className="w-full p-3 border rounded-lg shadow-sm pl-10 focus:ring-2 focus:ring-gray-400"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <span className="absolute left-3 top-3 text-gray-400">🔍</span>
         </div>
       </div>
 

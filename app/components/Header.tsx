@@ -25,13 +25,13 @@ const NavLink = ({
     href={href}
     className="relative flex items-center gap-2 hover:text-gray-900 transition-colors"
   >
-    <Icon className="w-5 h-5" />
+    <Icon className="w-5 h-5 relative" />
     {label}
-    {badgeCount && badgeCount > 0 && (
-      <span className="absolute top-0 right-0 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+    {badgeCount && badgeCount > 0 ? (
+      <span className="absolute -top-2 -right-5 bg-amber-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">
         {badgeCount}
       </span>
-    )}
+    ) : null}
   </a>
 );
 
